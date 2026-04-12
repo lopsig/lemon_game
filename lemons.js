@@ -13,9 +13,13 @@ let characterX = canvas.width / 2;
 let characterY = canvas.height-CHARACTER_HEIGHT-FLOOR_HEIGHT
 let lemonY = 0;
 let lemonX = canvas.width / 2;
+let score = 0;
+let life = 3;
+let speed = 200;
 
 ///FUNCIONES///
 function start() {
+  setInterval(moveDown, speed)
   drawFloor();
   drawCharacter();
   randomLemon();
@@ -53,18 +57,19 @@ const clearCanva = () => {
 const moveLeft = () => {
   characterX = characterX - 10;
   updateScreen();
-  collisionDetected()
+  collisionDetected() // función colisión tambien se añadió aqui
 };
 const moveRight = () => {
   characterX = characterX + 10;
   updateScreen();
-  collisionDetected();
+  collisionDetected(); // función colisión tambien se añadió aqui
 };
 
 const moveDown = () => {
   lemonY = lemonY + 10;
   updateScreen();
   collisionDetected();
+  floorDetected()
 };
 
 const collisionDetected = () => {
@@ -75,8 +80,17 @@ const collisionDetected = () => {
     lemonY < characterY + CHARACTER_HEIGHT
   ) {
     randomLemon();
+    score = score + 1;
+   showSpan("txtScore", score)
   }
+}
 
+const floorDetected = () => {
+  if (lemonY + LEMON_HEIGHT == canvas.height - FLOOR_HEIGHT) {
+    randomLemon();
+    life = life - 1;
+    showSpan("txtLife", life)
+  }
 }
 
 const randomLemon = () => {

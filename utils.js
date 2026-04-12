@@ -6,3 +6,8 @@ const random = (min, max) => {
 
   return numberInt;
 };
+
+const showSpan = (idSpan, value) => {
+  let component = document.getElementById(idSpan);
+  component.textContent = value;
+}
