@@ -10,14 +10,15 @@ const LEMON_WIDTH = 20
 
 ///VARIABLES///
 let characterX = canvas.width / 2;
-let lemonY = 5;
+let characterY = canvas.height-CHARACTER_HEIGHT-FLOOR_HEIGHT
+let lemonY = 0;
 let lemonX = canvas.width / 2;
 
 ///FUNCIONES///
 function start() {
   drawFloor();
   drawCharacter();
-  drawLemon()
+  randomLemon();
   
 }
 
@@ -29,7 +30,7 @@ const drawFloor = () => {
 
 const drawCharacter = () => {
   context.fillStyle = "black";
-  context.fillRect(characterX-CHARACTER_WIDTH/2, canvas.height-CHARACTER_HEIGHT-FLOOR_HEIGHT, CHARACTER_WIDTH, CHARACTER_HEIGHT)
+  context.fillRect(characterX-CHARACTER_WIDTH/2, characterY, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 }
 
 const drawLemon = () => {
@@ -37,19 +38,6 @@ const drawLemon = () => {
   context.fillRect(lemonX - LEMON_WIDTH/2, lemonY, LEMON_WIDTH, LEMON_HEIGHT)
 }
 
-const moveLeft = () => {
-  characterX = characterX - 5;
-  updateScreen()
-}
-const moveRight = () => {
-  characterX = characterX + 5;
-  updateScreen()
-}
-
-const moveDown = () => {
-  lemonY = lemonY + 10;
-  updateScreen()
-}
 
 const updateScreen = () => {
   clearCanva();
@@ -61,5 +49,41 @@ const updateScreen = () => {
 const clearCanva = () => {
   context.clearRect(0, 0, canvas.width, canvas.height - FLOOR_HEIGHT)
 }
+
+const moveLeft = () => {
+  characterX = characterX - 10;
+  updateScreen();
+  collisionDetected()
+};
+const moveRight = () => {
+  characterX = characterX + 10;
+  updateScreen();
+  collisionDetected();
+};
+
+const moveDown = () => {
+  lemonY = lemonY + 10;
+  updateScreen();
+  collisionDetected();
+};
+
+const collisionDetected = () => {
+  if (
+    lemonX + LEMON_WIDTH / 2 > characterX - CHARACTER_WIDTH / 2 &&
+    lemonX - LEMON_WIDTH / 2 < characterX + CHARACTER_WIDTH / 2 &&
+    lemonY + LEMON_HEIGHT > characterY &&
+    lemonY < characterY + CHARACTER_HEIGHT
+  ) {
+    randomLemon();
+  }
+
+}
+
+const randomLemon = () => {
+  lemonX = random(0, canvas.width - LEMON_WIDTH);
+  lemonY = 0;
+  updateScreen();
+}
+
 
 
