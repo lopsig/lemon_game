@@ -1,31 +1,254 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #0f172a;
-  color: white;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #0d1f0f;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, #1a3a1a 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, #1e3d0a 0%, transparent 50%);
+  color: #f0f0e8;
+  text-align: center;
+  min-height: 100vh;
+  padding: 24px 16px;
 }
 
 .contenedor {
-  max-width: 800px;
+  max-width: 680px;
   margin: 0 auto;
+  position: relative;
 }
 
+/* TÍTULO */
+h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  color: #ffe234;
+  letter-spacing: 1px;
+  text-shadow: 3px 3px 0px #5a7a00, 6px 6px 0px rgba(0,0,0,0.3);
+  margin-bottom: 4px;
+  animation: titleBounce 2s ease-in-out infinite;
+}
+
+@keyframes titleBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7aad3a;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* INSTRUCCIONES */
+.instrucciones {
+  background: rgba(255, 226, 52, 0.07);
+  border: 1px solid rgba(255, 226, 52, 0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.instrucciones h3 {
+  font-family: 'Fredoka One', cursive;
+  color: #ffe234;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.instrucciones p {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: #b8d48a;
+}
+
+.instrucciones strong {
+  color: #ffe234;
+}
+
+/* CANVAS */
 canvas {
-  background-color: #111827;
-  border: 3px solid #38bdf8;
+  background-color: #0a1a0c;
+  border: 3px solid #4a8a10;
+  border-radius: 16px;
   display: block;
-  margin: 20px auto;
+  margin: 0 auto 20px;
+  box-shadow:
+    0 0 0 1px rgba(122, 173, 58, 0.3),
+    0 0 30px rgba(74, 138, 16, 0.4),
+    0 8px 32px rgba(0,0,0,0.5);
+  max-width: 100%;
 }
 
+/* PANEL DE PUNTAJE */
 .panel {
-  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
 }
 
-.botones button {
-  margin: 5px;
-  padding: 10px 16px;
-  font-size: 16px;
+.panel p {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 226, 52, 0.25);
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  color: #c8e88a;
+  min-width: 130px;
+}
+
+.panel p span {
+  color: #ffe234;
+  font-size: 1.4rem;
+  margin-left: 6px;
+}
+
+/* BOTONES BASE */
+button {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
   cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 22px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+  letter-spacing: 0.5px;
+}
+
+button:active {
+  transform: scale(0.94) translateY(2px);
+}
+
+/* BOTONES DE ACCIÓN PRINCIPAL */
+.botones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* Iniciar */
+.botones button:first-child:not(:last-child),
+button[onclick="start()"] {
+  background: linear-gradient(135deg, #ffe234 0%, #f5b800 100%);
+  color: #1a3a00;
+  font-size: 1.1rem;
+  padding: 12px 32px;
+  box-shadow: 0 4px 0 #a07800, 0 6px 16px rgba(255, 226, 52, 0.3);
+}
+
+button[onclick="start()"]:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 0 #a07800, 0 8px 20px rgba(255, 226, 52, 0.4);
+  transform: translateY(-2px);
+}
+
+button[onclick="start()"]:active {
+  box-shadow: 0 2px 0 #a07800;
+  transform: translateY(2px);
+}
+
+/* Flechas de movimiento */
+button[onclick="moveLeft()"],
+button[onclick="moveRight()"] {
+  background: linear-gradient(135deg, #2d6e0f 0%, #3d8a14 100%);
+  color: #c8f07a;
+  font-size: 1.3rem;
+  padding: 12px 28px;
+  box-shadow: 0 4px 0 #1a4200, 0 6px 14px rgba(74, 138, 16, 0.3);
+  min-width: 80px;
+}
+
+button[onclick="moveLeft()"]:hover,
+button[onclick="moveRight()"]:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+button[onclick="moveLeft()"]:active,
+button[onclick="moveRight()"]:active {
+  box-shadow: 0 2px 0 #1a4200;
+  transform: translateY(2px);
+}
+
+/* Reiniciar */
+button[onclick="restart()"] {
+  background: linear-gradient(135deg, #1e5fa8 0%, #2878cc 100%);
+  color: #c8e4ff;
+  box-shadow: 0 4px 0 #0a2f6e, 0 6px 14px rgba(30, 95, 168, 0.3);
+}
+
+button[onclick="restart()"]:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+button[onclick="restart()"]:active {
+  box-shadow: 0 2px 0 #0a2f6e;
+  transform: translateY(2px);
+}
+
+/* Detener */
+button[onclick="stopGame()"] {
+  background: linear-gradient(135deg, #8a1f1f 0%, #b02828 100%);
+  color: #ffc8c8;
+  box-shadow: 0 4px 0 #4a0a0a, 0 6px 14px rgba(138, 31, 31, 0.3);
+}
+
+button[onclick="stopGame()"]:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+button[onclick="stopGame()"]:active {
+  box-shadow: 0 2px 0 #4a0a0a;
+  transform: translateY(2px);
+}
+
+/* MENSAJE */
+#mensaje {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  color: #ffe234;
+  min-height: 2rem;
+  margin-top: 8px;
+  text-shadow: 1px 1px 8px rgba(255, 226, 52, 0.5);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .panel {
+    gap: 12px;
+  }
+
+  .panel p {
+    padding: 8px 16px;
+    min-width: 100px;
+    font-size: 0.95rem;
+  }
 }
