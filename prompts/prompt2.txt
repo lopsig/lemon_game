@@ -1,0 +1,4 @@
+1) Ahora ayudame a implementar un background
+
+2) Me gusta mas este ultimo .css, es más de mi estilo.
+   Pero puedes ayudar agregando una imagen de fondo por favor. Sin perder el estilo actual
