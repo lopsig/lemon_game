@@ -1,4 +1,2 @@
-1) Ayudame a mejorar la interfaz gráfica de este juego
-   Es un juego de atrapar limones. Quiero que se vea llamativo y divertido
-
-2) Puedes reemplazar los alert para ganar o perder por modales por favor?
+Ayudame a mejorar la interfaz gráfica de este juego
+Es un juego de atrapar limones. Quiero que se vea llamativo y divertido

@@ -24,6 +24,10 @@ function start() {
   gameActive = true;
   clearInterval(interval);
   interval = setInterval(moveDown, speed)
+  life = 3;
+  showSpan("txtLife", life);
+  score = 0;
+  showSpan("txtScore", score);
   drawFloor();
   drawCharacter();
   randomLemon();

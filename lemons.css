@@ -8,23 +8,94 @@
 
 body {
   font-family: 'Nunito', sans-serif;
-  background-color: #0d1f0f;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, #1a3a1a 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, #1e3d0a 0%, transparent 50%);
+  background-color: #060d1f;
+  background-image: url('https://images.pexels.com/photos/1417651/pexels-photo-1417651.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: #f0f0e8;
   text-align: center;
   min-height: 100vh;
   padding: 24px 16px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  background-image:
+    linear-gradient(rgba(4, 8, 28, 0.65), rgba(4, 8, 28, 0.65)),
+    radial-gradient(1px 1px at 10% 15%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, #fffde0 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 8%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 30%, #fffde0 0%, transparent 100%),
+    radial-gradient(2px 2px at 70% 12%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 45%, #fffde0 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 92% 20%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 70%, #fffde0 0%, transparent 100%),
+    radial-gradient(2px 2px at 30% 85%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 48% 60%, #fffde0 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 62% 75%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 90%, #fffde0 0%, transparent 100%),
+    radial-gradient(2px 2px at 5% 50%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 65%, #fffde0 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 55%, #ffffff 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 50% 80%, #fffde0 0%, transparent 100%),
+    radial-gradient(1px 1px at 73% 35%, #ffffff 0%, transparent 100%),
+    radial-gradient(2px 2px at 88% 78%, #fffde0 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 95%, #ffffff 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 48%, #fffde0 0%, transparent 100%);
+  animation: twinkle1 4s ease-in-out infinite alternate;
+}
+
+body::after {
+  background-image:
+    radial-gradient(1px 1px at 8% 32%, #ffe234 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 22% 18%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 37% 72%, #fffde0 0%, transparent 100%),
+    radial-gradient(2px 2px at 52% 22%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 67% 58%, #ffe234 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 80% 28%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 93% 42%, #fffde0 0%, transparent 100%),
+    radial-gradient(2px 2px at 12% 88%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 44% 95%, #ffe234 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 58% 15%, #fffde0 0%, transparent 100%),
+    radial-gradient(1px 1px at 76% 68%, #ffffff 0%, transparent 100%),
+    radial-gradient(2px 2px at 3% 62%, #fffde0 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 10%, #ffe234 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 28% 48%, #ffffff 0%, transparent 100%),
+    radial-gradient(1px 1px at 83% 55%, #fffde0 0%, transparent 100%);
+  animation: twinkle2 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle1 {
+  0%   { opacity: 0.5; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes twinkle2 {
+  0%   { opacity: 0.8; }
+  50%  { opacity: 0.3; }
+  100% { opacity: 0.9; }
 }
 
 .contenedor {
   max-width: 680px;
   margin: 0 auto;
   position: relative;
+  z-index: 1;
 }
 
-/* TÍTULO */
 h1 {
   font-family: 'Fredoka One', cursive;
   font-size: clamp(2rem, 6vw, 3.2rem);
@@ -50,7 +121,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* INSTRUCCIONES */
 .instrucciones {
   background: rgba(255, 226, 52, 0.07);
   border: 1px solid rgba(255, 226, 52, 0.2);
@@ -77,21 +147,19 @@ h2 {
   color: #ffe234;
 }
 
-/* CANVAS */
 canvas {
-  background-color: #0a1a0c;
-  border: 3px solid #4a8a10;
+  background-color: #08102a;
+  border: 3px solid #3a5fa8;
   border-radius: 16px;
   display: block;
   margin: 0 auto 20px;
   box-shadow:
-    0 0 0 1px rgba(122, 173, 58, 0.3),
-    0 0 30px rgba(74, 138, 16, 0.4),
-    0 8px 32px rgba(0,0,0,0.5);
+    0 0 0 1px rgba(100, 150, 255, 0.2),
+    0 0 40px rgba(50, 80, 200, 0.35),
+    0 8px 32px rgba(0,0,0,0.6);
   max-width: 100%;
 }
 
-/* PANEL DE PUNTAJE */
 .panel {
   display: flex;
   justify-content: center;
@@ -116,7 +184,6 @@ canvas {
   margin-left: 6px;
 }
 
-/* BOTONES BASE */
 button {
   font-family: 'Fredoka One', cursive;
   font-size: 1rem;
@@ -132,7 +199,6 @@ button:active {
   transform: scale(0.94) translateY(2px);
 }
 
-/* BOTONES DE ACCIÓN PRINCIPAL */
 .botones {
   display: flex;
   justify-content: center;
@@ -141,8 +207,6 @@ button:active {
   margin-bottom: 14px;
 }
 
-/* Iniciar */
-.botones button:first-child:not(:last-child),
 button[onclick="start()"] {
   background: linear-gradient(135deg, #ffe234 0%, #f5b800 100%);
   color: #1a3a00;
@@ -162,7 +226,6 @@ button[onclick="start()"]:active {
   transform: translateY(2px);
 }
 
-/* Flechas de movimiento */
 button[onclick="moveLeft()"],
 button[onclick="moveRight()"] {
   background: linear-gradient(135deg, #2d6e0f 0%, #3d8a14 100%);
@@ -185,7 +248,6 @@ button[onclick="moveRight()"]:active {
   transform: translateY(2px);
 }
 
-/* Reiniciar */
 button[onclick="restart()"] {
   background: linear-gradient(135deg, #1e5fa8 0%, #2878cc 100%);
   color: #c8e4ff;
@@ -202,7 +264,6 @@ button[onclick="restart()"]:active {
   transform: translateY(2px);
 }
 
-/* Detener */
 button[onclick="stopGame()"] {
   background: linear-gradient(135deg, #8a1f1f 0%, #b02828 100%);
   color: #ffc8c8;
@@ -219,7 +280,6 @@ button[onclick="stopGame()"]:active {
   transform: translateY(2px);
 }
 
-/* MENSAJE */
 #mensaje {
   font-family: 'Fredoka One', cursive;
   font-size: 1.3rem;
@@ -235,7 +295,6 @@ button[onclick="stopGame()"]:active {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE */
 @media (max-width: 480px) {
   canvas {
     width: 100% !important;
