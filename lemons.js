@@ -16,14 +16,43 @@ let lemonX = canvas.width / 2;
 let score = 0;
 let life = 3;
 let speed = 200;
+let gameActive = false;
+let interval = null
 
 ///FUNCIONES///
 function start() {
-  setInterval(moveDown, speed)
+  gameActive = true;
+  clearInterval(interval);
+  interval = setInterval(moveDown, speed)
   drawFloor();
   drawCharacter();
   randomLemon();
-  
+}
+
+function restart() {
+  gameActive = true;
+  clearInterval(interval);
+  interval = setInterval(moveDown, speed);
+  life = 3;
+  showSpan("txtLife", life)
+  score = 0;
+  showSpan("txtScore", score)
+  drawFloor();
+  drawCharacter();
+  randomLemon();
+};
+
+function stopGame() {
+  gameActive = false
+  clearInterval(interval);
+  life = 3;
+  showSpan("txtLife", life);
+  score = 0;
+  showSpan("txtScore", score);
+  drawFloor();
+  drawCharacter();
+  randomLemon();
+
 }
 
 const drawFloor = () => {
@@ -73,6 +102,10 @@ const moveDown = () => {
 };
 
 const collisionDetected = () => {
+  if (gameActive == false) {
+    return
+  }
+
   if (
     lemonX + LEMON_WIDTH / 2 > characterX - CHARACTER_WIDTH / 2 &&
     lemonX - LEMON_WIDTH / 2 < characterX + CHARACTER_WIDTH / 2 &&
@@ -81,15 +114,32 @@ const collisionDetected = () => {
   ) {
     randomLemon();
     score = score + 1;
-   showSpan("txtScore", score)
+    showSpan("txtScore", score)
+    
+    if (score == 7) {
+      gameActive = false
+      showSpan("txtScore", score);
+      alert("GANASTE!!!")
+      clearInterval(interval)
+      life = 3;
+      showSpan("txtLife", life)
+    }
   }
 }
 
 const floorDetected = () => {
+  //gameActive = false
   if (lemonY + LEMON_HEIGHT == canvas.height - FLOOR_HEIGHT) {
     randomLemon();
     life = life - 1;
     showSpan("txtLife", life)
+  }
+
+  if (life == 0) {
+    clearInterval(interval);
+    alert("PERDISTE - TE QUEDASTE SIN VIDAS")
+    restart()
+    
   }
 }
 

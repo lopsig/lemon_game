@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Atrapa Limones</title>
   <link rel="stylesheet" href="lemons.css">
  
 </head>
-<body onload="start()">
+<body>
   <div class="contenedor">
     <h1>Atrapar Limones</h1>
-    <p>Si del cielo te caen limones, aprende hacer limonada </p>
     <h2>Autor: LopSig Dev</h2>
+      <div>
+        <h3>Instrucciones:</h3>
+        <p>
+          <strong>
+            - Pulsa el botón "Iniciar Juego" para comenzar <br>
+          </strong>
+          - Atrapa 7 veces el limón para ganar el juego <br>
+          - Pulsa los botones ⬅ ➡ para moverte<br>
+          - Pierdes si te quedas sin vidas y el juego se reinicia automaticamente <br>
+          - Puedes reiniciar el juego cuando quieras <br>
+          - Pulsa "Detener" para acabar el juego
+        </p>
+      </div>
+      
+      <div class="botones">
+        <button  onclick="start()">Iniciar Juego</button>
+      </div>
     <canvas id="gameArea" width="600" height="400"></canvas>
     
     <div class="panel">
@@ -17,10 +34,12 @@
       <p>Vidas: <span id="txtLife">3</span></p>
     </div>
     <div class="botones">
-      <button onclick="moveLeft()">Izquierda</button>
-      <button onclick="moveRight()">Derecha</button>
-      <!-- <button onclick="moveDown()">Bajar Limón</button> -->
-      <button>Reiniciar</button>
+      <button onclick="moveLeft()">⬅</button>
+      <button onclick="moveRight()">➡</button>
+    </div>
+    <div class="botones">
+      <button onclick="restart()">Reiniciar</button>
+      <button onclick="stopGame()">Detener</button>
     </div>
   </div>
 
