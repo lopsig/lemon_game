@@ -66,7 +66,7 @@ const drawFloor = () => {
 }
 
 const drawCharacter = () => {
-  context.fillStyle = "black";
+  context.fillStyle = "yellow";
   context.fillRect(characterX-CHARACTER_WIDTH/2, characterY, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 }
 
